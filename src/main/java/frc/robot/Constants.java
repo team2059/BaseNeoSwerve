@@ -17,7 +17,7 @@ public final class Constants {
                 public static final double wheelBase = Units.inchesToMeters(16.5);
 
                 // nominal (real) divided by fudge factor
-                public static final double wheelDiameter = Units.inchesToMeters(4.0/1.04085);
+                public static final double wheelDiameter = Units.inchesToMeters(4.0 / 1.04085);
                 public static final double wheelCircumference = wheelDiameter * Math.PI;
 
                 public static final double driveGearRatio = (6.75 / 1.0); // 6.75:1
@@ -57,6 +57,11 @@ public final class Constants {
                 public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
 
                 public static final double cameraToFrontEdgeDistanceMeters = Units.inchesToMeters(7);
+
+                public static final double xCameraOffset = Units.inchesToMeters(5.25);
+                public static final double yCameraOffset = Units.inchesToMeters(1.25);
+                public static final double originToFront = Units.inchesToMeters(11);
+                public static final double originToSide = Units.inchesToMeters(-10);
 
         }
 
