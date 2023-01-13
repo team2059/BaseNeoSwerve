@@ -52,6 +52,7 @@ public class RobotContainer {
   private final JoystickButton zeroGyro;
   private final JoystickButton alignWithTarget;
   private final JoystickButton followTag;
+  private final JoystickButton autoBalance;
 
   /* Subsystems */
   private final SwerveBase swerveBase;
@@ -73,6 +74,7 @@ public class RobotContainer {
     zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     alignWithTarget = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     followTag = new JoystickButton(driver, XboxController.Button.kB.value);
+    autoBalance = new JoystickButton(driver, XboxController.Button.kX.value);
     swerveBase = new SwerveBase();
     limelight = new Limelight();
     swerveBase.setDefaultCommand(
@@ -81,7 +83,7 @@ public class RobotContainer {
             () -> driver.getRawAxis(translationAxis),
             () -> driver.getRawAxis(strafeAxis),
             () -> driver.getRawAxis(rotationAxis),
-           ()-> !driver.getRawButton(XboxController.Button.kLeftBumper.value)));
+            () -> !driver.getRawButton(XboxController.Button.kLeftBumper.value)));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -106,6 +108,8 @@ public class RobotContainer {
     // alignWithTarget.whileHeld(new VisionAlignCmd(limelight, swerveBase));
 
     alignWithTarget.whileTrue(new VisionAlignCmd(limelight, swerveBase));
+
+    autoBalance.onTrue(new AutoBalanceCmd(swerveBase));
 
   }
 

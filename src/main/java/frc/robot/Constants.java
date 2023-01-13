@@ -58,11 +58,13 @@ public final class Constants {
 
                 public static final double cameraToFrontEdgeDistanceMeters = Units.inchesToMeters(7);
 
+        }
+
+        public static final class LimelightConstants {
                 public static final double xCameraOffset = Units.inchesToMeters(5.25);
                 public static final double yCameraOffset = Units.inchesToMeters(1.25);
                 public static final double originToFront = Units.inchesToMeters(11);
-                public static final double originToSide = Units.inchesToMeters(-10);
-
+                public static final double originToSide = Units.inchesToMeters(0);
         }
 
         public static final class AutoConstants {
