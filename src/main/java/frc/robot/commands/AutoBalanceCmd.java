@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.ArrayList;
+
 import org.opencv.core.Mat;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +19,7 @@ public class AutoBalanceCmd extends CommandBase {
   double driveSpeed;
   double kDriveP;
   boolean haveIBeenTilted = false;
+  boolean isCloserToCenter = false;
 
   /** Creates a new AutoBalanceCmd. */
   public AutoBalanceCmd(SwerveBase swerveBase) {
@@ -34,14 +37,25 @@ public class AutoBalanceCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     roll = swerveBase.getNavX().getRoll();
-    if (Math.abs(roll) > 5) {
+
+    if (Math.abs(roll) > 10) {
       haveIBeenTilted = true;
     }
+
     System.out.println("roll" + roll);
     error = 0 - roll;
     System.out.println("error" + error);
-    swerveBase.drive(0.45, 0, 0, true);
+    if (haveIBeenTilted == false) {
+      swerveBase.drive(0.66, 0, 0, true);
+    } else {
+
+      swerveBase.drive(Math.signum(error) * 0.2, 0, 0, true);
+      if (Math.abs(error) < 2.5) {
+        swerveBase.stopModules();
+      }
+    }
 
   }
 
@@ -55,6 +69,7 @@ public class AutoBalanceCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (haveIBeenTilted && Math.abs(error) < 2.5);
+    // return (haveIBeenTilted && Math.abs(error) < 2.5);
+    return false;
   }
 }
